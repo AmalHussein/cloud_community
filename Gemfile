@@ -7,7 +7,7 @@ gem 'rails', '4.0.1'
 gem 'pg'
 
 gem 'pry-rails'
-gem 'better_errors'
+# gem 'better_errors'
 gem 'dotenv-rails'
 gem 'omniauth-google-oauth2'
 gem 'youtube_it'
