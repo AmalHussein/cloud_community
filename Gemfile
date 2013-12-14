@@ -14,6 +14,7 @@ gem 'youtube_it'
 gem 'soundcloud'
 gem 'httparty'
 gem 'rails_12factor'
+gem 'omniauth-soundcloud'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
