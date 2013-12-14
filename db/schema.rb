@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20131213225549) do
     t.text     "last_name"
     t.string   "birthday"
     t.string   "zip_code"
+    t.text     "client_id"
+    t.text     "access_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

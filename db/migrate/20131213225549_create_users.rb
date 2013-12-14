@@ -7,6 +7,8 @@ class CreateUsers < ActiveRecord::Migration
     	t.text :last_name
     	t.string :birthday
     	t.string :zip_code
+      t.text :client_id
+      t.text :access_token
       t.timestamps
     end
   end

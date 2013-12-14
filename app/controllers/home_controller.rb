@@ -10,7 +10,7 @@ class HomeController < ApplicationController
 	def callback
 		# exchange authorization code for access token
 		code = params[:code]
-		access_token = current_client.exchange_token(:code => code)
+		@access_token = current_client.exchange_token(:code => code)
 		redirect_to root_url
 	end
 
