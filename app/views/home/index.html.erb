@@ -1,4 +1,8 @@
 <h1>TESTING SOUNDCLOUD OAUTH</h1>
 
-<!-- create a route for a home#login action --> 
+<% if current_user %>
+  Signed in as <%= current_user.sc_username %>!
+  <%= link_to "Sign out", signout_path %>
+<% else %>
 <%= link_to "Login to soundcloud", '/auth/soundcloud' %>
+<% end %>
