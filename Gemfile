@@ -13,6 +13,7 @@ gem 'omniauth-google-oauth2'
 gem 'youtube_it'
 gem 'soundcloud'
 gem 'httparty'
+gem 'rails_12factor'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
