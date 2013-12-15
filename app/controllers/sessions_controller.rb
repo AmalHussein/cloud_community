@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
 	 #  session[:user_id] = user.google_uid
 		# end 
 		# binding.pry
-		#session[:user_id] = user.id
+		session[:user_id] = user.id
 	  redirect_to root_url, :notice => "Signed in!"
 	end
 
