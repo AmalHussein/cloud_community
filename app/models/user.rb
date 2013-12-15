@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
 		case provider
 			when auth["provider"] == "soundcloud"
 			  create! do |user|
-			    user.provider = auth["provider"]
 			    user.sc_uid = auth["uid"]
 			    user.sc_nickname = auth["info"]["nickname"]
 			    user.sc_image = auth["info"]["image"]
@@ -36,8 +35,11 @@ class User < ActiveRecord::Base
 			   	user.sc_private_playlists_count = auth["extra"]["raw_info"]["private_playlists_count"]
 			   	user.sc_primary_email_confirmed = auth["extra"]["raw_info"]["primary_email_confirmed"]
 			  end 
-			  when auth["provider"] == "google"
-
+			  when auth["provider"] == "google_oauth2"
+			  	create! do |user|
+			  		user.google_uid = auth["uid"]
+			  		user.
+			  	end
 	  end
 	end
 
