@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
 
 	def self.from_omniauth(auth)
-		find_by_provider_and_sc_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)
-		#where(auth.slice("provider", "uid")).first |
+		where(auth.slice("sc_uid")).first  || where(auth.slice("google_uid")).first || create_with_omniauth(auth)
 	end
 
 	def self.create_with_omniauth(auth)
@@ -38,7 +37,6 @@ class User < ActiveRecord::Base
 			  end 
 			  when "google_oauth2"
 			  	create! do |user|
-			  		#binding.pry
 			  		user.google_uid = auth["uid"]
 			  		user.google_fullname = auth["info"]["name"]
 			  		#user.google_email = auth["info"]["email"] #email repeat

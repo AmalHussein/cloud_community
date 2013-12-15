@@ -8,8 +8,8 @@ class CreateUsers < ActiveRecord::Migration
     	t.string :cc_birthday
     	t.string :cc_zip_code
       t.text :provider
-      t.integer :sc_uid  #usually the same as id == uid
-      t.integer :sc_id
+      t.text :sc_uid, :limit => 8 #usually the same as id == uid
+      t.text :sc_id
       t.text :sc_nickname
       t.text :sc_image
       t.text :sc_token
@@ -33,14 +33,14 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :sc_private_tracks_count
       t.integer :sc_private_playlists_count
       t.boolean :sc_primary_email_confirmed
-      t.integer    :google_uid 
+      t.text    :google_uid
       t.text    :google_fullname 
       t.text    :google_first_name  
       t.text    :google_last_name
       t.text    :google_image  
       t.text    :google_link               
       t.text    :google_plus_profile
-      t.integer    :google_id
+      t.text    :google_id
       t.text    :google_email
       t.boolean    :google_verified_email 
       t.text :google_token
