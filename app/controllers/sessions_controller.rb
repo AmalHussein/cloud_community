@@ -2,11 +2,14 @@ class SessionsController < ApplicationController
 
 	def create
 	  auth = request.env["omniauth.auth"]
-	  binding.pry
 	  user = User.find_by_provider_and_sc_uid(auth["provider"], auth["uid"]) ||
 	  			 User.find_by_provider_and_google_uid(auth["provider"], auth["uid"]) ||
 	  			 User.create_from_omniauth(auth)
-	  session[:user_id] = user.id
+	 #  if auth["provider"] == "google_oauth2"
+	 #  session[:user_id] = user.google_uid
+		# end 
+		# binding.pry
+		#session[:user_id] = user.id
 	  redirect_to root_url, :notice => "Signed in!"
 	end
 

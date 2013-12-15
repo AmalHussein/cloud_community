@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 	end
 
 	def self.create_from_omniauth(auth)
-		case provider
+		case auth["provider"]
 			when auth["provider"] == "soundcloud"
 			  create! do |user|
 			    user.sc_uid = auth["uid"]
