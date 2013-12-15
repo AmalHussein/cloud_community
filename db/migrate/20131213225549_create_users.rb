@@ -33,6 +33,21 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :sc_private_tracks_count
       t.integer :sc_private_playlists_count
       t.boolean :sc_primary_email_confirmed
+      t.integer    :google_uid 
+      t.text    :google_fullname 
+      t.text    :google_first_name  
+      t.text    :google_last_name
+      t.text    :google_image                 
+      t.text    :google_plus_profile
+      t.integer    :google_id
+      t.text    :google_email
+      t.boolean    :google_verified_email 
+      t.text    :google_fullname 
+      t.text    :google_given_name 
+      t.text    :google_family_name 
+      t.text    :google_picture 
+      t.text    :google_gender 
+      t.text    :google_locale
       t.timestamps
     end
   end
