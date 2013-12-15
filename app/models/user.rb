@@ -1,12 +1,13 @@
 class User < ActiveRecord::Base
 
 	def self.from_omniauth(auth)
-	  where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
+		find_by_provider_and_sc_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)
+		#where(auth.slice("provider", "uid")).first |
 	end
 
-	def self.create_from_omniauth(auth)
+	def self.create_with_omniauth(auth)
 		case auth["provider"]
-			when auth["provider"] == "soundcloud"
+			when "soundcloud"
 			  create! do |user|
 			    user.sc_uid = auth["uid"]
 			    user.sc_nickname = auth["info"]["nickname"]
@@ -35,8 +36,9 @@ class User < ActiveRecord::Base
 			   	user.sc_private_playlists_count = auth["extra"]["raw_info"]["private_playlists_count"]
 			   	user.sc_primary_email_confirmed = auth["extra"]["raw_info"]["primary_email_confirmed"]
 			  end 
-			  when auth["provider"] == "google_oauth2"
+			  when "google_oauth2"
 			  	create! do |user|
+			  		binding.pry
 			  		user.google_uid = auth["uid"]
 			  		user.google_fullname = auth["info"]["name"]
 			  		#user.google_email = auth["info"]["email"] #email repeat

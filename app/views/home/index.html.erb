@@ -8,7 +8,7 @@
 <% end %>
 
 <% if current_user %> 
-Signed in as <%= current_user.goog_username %>!
+Signed in as <%= current_user.google_fullname %>!
 <%= link_to "Sign of YouTube", signout_path %> 
 <% else %> 
 <%= link_to "Login to YouTube", "/auth/google_oauth2" %> 
