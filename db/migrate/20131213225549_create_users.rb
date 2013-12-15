@@ -37,11 +37,15 @@ class CreateUsers < ActiveRecord::Migration
       t.text    :google_fullname 
       t.text    :google_first_name  
       t.text    :google_last_name
-      t.text    :google_image                 
+      t.text    :google_image  
+      t.text    :google_link               
       t.text    :google_plus_profile
       t.integer    :google_id
       t.text    :google_email
       t.boolean    :google_verified_email 
+      t.text :google_token
+      t.integer :google_expires_at
+      t.boolean :google_expires 
       t.text    :google_fullname 
       t.text    :google_given_name 
       t.text    :google_family_name 

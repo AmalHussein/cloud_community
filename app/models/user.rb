@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
 			  end 
 			  when "google_oauth2"
 			  	create! do |user|
-			  		binding.pry
+			  		#binding.pry
 			  		user.google_uid = auth["uid"]
 			  		user.google_fullname = auth["info"]["name"]
 			  		#user.google_email = auth["info"]["email"] #email repeat
@@ -47,6 +47,8 @@ class User < ActiveRecord::Base
 			  		user.google_image = auth["info"]["image"]										#urls is a hash of links
 			  		user.google_plus_profile = auth["info"]["urls"]["Google"] #look into possibly saving more than url for ppl with more links
 			  		user.google_token = auth["credentials"]["token"]
+			  		user.google_expires_at = auth["credentials"]["expires_at"]
+			  		user.google_expires = auth["credentials"]["expires"]
 			  		user.google_id = auth["extra"]["raw_info"]["id"]
 			  		user.google_email = auth["extra"]["raw_info"]["email"]
 			  		user.google_verified_email = auth["extra"]["raw_info"]["verified_email"]
