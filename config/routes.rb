@@ -5,7 +5,7 @@ CloudCommunity::Application.routes.draw do
   resources :users
   root 'home#index'
 
-  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/:provider/callback', to: 'authentications#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
