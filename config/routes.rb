@@ -1,4 +1,6 @@
 CloudCommunity::Application.routes.draw do
+  get "authentications/index"
+  get "authentications/create"
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
   resources :users
   root 'home#index'
