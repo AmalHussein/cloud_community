@@ -1,11 +1,10 @@
 <h1>TESTING SOUNDCLOUD OAUTH</h1>
 
-<% if current_user %>
   Signed in as <%= current_user.sc_username %>!
   <%= link_to "Sign out of SoundCloud", signout_path %>
-<% else %>
+
 <%= link_to "Login to soundcloud", '/auth/soundcloud' %>
-<% end %>
+
 
 <% if current_user %> 
 Signed in as <%= current_user.google_fullname %>!

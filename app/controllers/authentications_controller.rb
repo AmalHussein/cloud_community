@@ -2,12 +2,12 @@ class AuthenticationsController < ApplicationController
   
 
   def index
-  	@authentications = Authentication.all 
+  	@authentications = current_user.authentications
   end
 
   def create
   	 auth = request.env["omniauth.auth"]
-  	 binding.pry
+	   current_user.authentications.create( provider: => auth['provider'] , uid: auth['uid'] )
 	   user = User.from_omniauth(auth)
   end
 end
