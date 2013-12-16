@@ -9,6 +9,6 @@ class AuthenticationsController < ApplicationController
   	 auth = request.env["omniauth.auth"]
 	   current_user.authentications.create( provider: auth['provider'] , uid: auth['uid'] )
 	   user = User.create_with_omniauth(auth)
-	   redirect_to root_url
+	   redirect_to authentications_url
   end
 end
