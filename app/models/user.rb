@@ -4,6 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  #attr_accessible :email, :password, :password_confirmation, :remember_me, :cc_username
+  validates_presence_of :cc_username, :email  
+   
+  #TODO consolidate cc_email and devise email field
+  #TODO add strong params for devise for user fields
+  
+
 	def self.from_omniauth(auth)
 		where(auth.slice("sc_uid")).first  || where(auth.slice("google_uid")).first || create_with_omniauth(auth)
 	end
