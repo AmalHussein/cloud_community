@@ -1,11 +1,14 @@
 CloudCommunity::Application.routes.draw do
-  get "authentications/index"
-  get "authentications/create"
+  
+ 
+
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
   resources :users
   root 'home#index'
 
   get 'auth/:provider/callback', to: 'authentications#create'
+  get "authentications", to: 'authentications#index', as: 'authentications'
+  delete "authentications/delete", to: 'authentications#destroy', as: 'delete_authentication'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
