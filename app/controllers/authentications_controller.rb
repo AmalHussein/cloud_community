@@ -9,7 +9,7 @@ class AuthenticationsController < ApplicationController
 
 	def create
 		auth = request.env["omniauth.auth"]
-		current_user.authentications.create( provider: auth['provider'] , uid: auth['uid'] )
+		current_user.authentications.find_or_create_by( provider: auth['provider'] , uid: auth['uid'].to_s )
 		user = User.create_with_omniauth(auth)
 		flash[:notice] = "Authentication successful."
 		redirect_to authentications_path
