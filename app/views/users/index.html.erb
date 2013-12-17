@@ -11,6 +11,12 @@
 
   <tbody>
     <% @users.each do |user| %>
+  
+        <%= user.cc_username %></br>
+         <%= user.email %></br>
+          <%= user.sc_nickname %></b>
+          <%= user.google_fullname %> </br>
+
       <tr>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>

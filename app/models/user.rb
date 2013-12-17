@@ -19,7 +19,6 @@ class User < ActiveRecord::Base
   	case auth["provider"]
   	when "soundcloud"
   		@authentication = Authentication.where(uid: auth["uid"].to_s)
-  		# binding.pry
   		user = @authentication.last.user 
   		user.sc_uid = auth["uid"]
   		user.sc_nickname = auth["info"]["nickname"]
@@ -59,6 +58,7 @@ class User < ActiveRecord::Base
   		user.google_image = auth["info"]["image"]										#urls is a hash of links
   		user.google_plus_profile = auth["info"]["urls"]["Google"] #look into possibly saving more than url for ppl with more links
   		user.google_token = auth["credentials"]["token"]
+      user.google_refresh_token = auth["credentials"]["refresh_token"]
   		user.google_expires_at = auth["credentials"]["expires_at"]
   		user.google_expires = auth["credentials"]["expires"]
   		user.google_id = auth["extra"]["raw_info"]["id"]
@@ -74,4 +74,24 @@ class User < ActiveRecord::Base
   		user.save!
   	end
   end
+
+  def youtube_client
+    YouTubeIt::OAuth2Client.new(
+      client_access_token: google_token, client_refresh_token: google_refresh_token,
+      client_id: ENV['GOOGLE_CLIENT_ID'], client_secret: ENV['GOOGLE_CLIENT_SECRET'], 
+      dev_key: ENV['GOOGLE_DEV_KEY'], expires_at: google_expires_at)
+  end 
+
+
+
+
+
+
+
+
+
+
+
+
+
 end

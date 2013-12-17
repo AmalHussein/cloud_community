@@ -46,6 +46,7 @@ class CreateUsers < ActiveRecord::Migration
       t.text :google_token
       t.integer :google_expires_at
       t.boolean :google_expires 
+      t.text    :google_refresh_token
       t.text    :google_fullname 
       t.text    :google_given_name 
       t.text    :google_family_name 
