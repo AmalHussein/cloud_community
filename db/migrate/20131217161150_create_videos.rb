@@ -1,7 +1,7 @@
 class CreateVideos < ActiveRecord::Migration
   def change
     create_table :videos do |t|
-    	t.belongs_to :user_id
+    	t.belongs_to :user
     	t.text :unique_id
     	t.text :description 
     	t.text :author 

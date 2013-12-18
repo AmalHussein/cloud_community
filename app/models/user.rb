@@ -77,19 +77,10 @@ class User < ActiveRecord::Base
   has_many :authentications
   has_many :videos
 
-  after_create :save_videos 
-  #, :unless => Proc.new{ self.google_fullname == nil }    
-  
-    
-  #attr_accessible :email, :password, :password_confirmation, :remember_me, :cc_username ADD STRONG PARAMS LATER
-  
-  #TODO consolidate cc_email and devise email field
-  #TODO add strong params for devise for user fields
-  #TODO add validates uniquineess of email, and username , also add a regex for the email
-
-  def self.from_omniauth(auth)
-  	where(auth.slice("sc_uid")).first  || where(auth.slice("google_uid")).first || create_with_omniauth(auth)
+  def self.login(auth)
+    self.create_with_omniauth(auth)
   end
+
 
   def self.create_with_omniauth(auth)
   	case auth["provider"]
@@ -135,12 +126,12 @@ class User < ActiveRecord::Base
   		user.google_plus_profile = auth["info"]["urls"]["Google"] #look into possibly saving more than url for ppl with more links
   		user.google_token = auth["credentials"]["token"]
       user.google_refresh_token = auth["credentials"]["refresh_token"]
-  		user.google_expires_at = auth["credentials"]["expires_at"]
-  		user.google_expires = auth["credentials"]["expires"]
-  		user.google_id = auth["extra"]["raw_info"]["id"]
-  		user.google_email = auth["extra"]["raw_info"]["email"]
-  		user.google_verified_email = auth["extra"]["raw_info"]["verified_email"]
-  		user.google_fullname = auth["extra"]["raw_info"]["fullname"]
+      user.google_expires_at = auth["credentials"]["expires_at"]
+      user.google_expires = auth["credentials"]["expires"]
+      user.google_id = auth["extra"]["raw_info"]["id"]
+      user.google_email = auth["extra"]["raw_info"]["email"]
+      user.google_verified_email = auth["extra"]["raw_info"]["verified_email"]
+      user.google_fullname = auth["extra"]["raw_info"]["fullname"]
   		user.google_given_name = auth["extra"]["raw_info"]["given_name"] #repeat of first name
   		user.google_family_name = auth["extra"]["raw_info"]["family_name"] #repeat of last name
   		user.google_link = auth["extra"]["raw_info"]["link"]
@@ -148,30 +139,30 @@ class User < ActiveRecord::Base
   		user.google_gender = auth["extra"]["raw_info"]["gender"]
   		user.google_locale = auth["extra"]["raw_info"]["locale"]
   		user.save!
-  	end
+      user.save_videos
+    end
   end
 
-  def youtube_client
+  def youtube_client 
     YouTubeIt::OAuth2Client.new(
       client_access_token: google_token, client_refresh_token: google_refresh_token,
       client_id: ENV['GOOGLE_CLIENT_ID'], client_secret: ENV['GOOGLE_CLIENT_SECRET'], 
       dev_key: ENV['GOOGLE_DEV_KEY'], expires_at: google_expires_at)
   end 
 
-  def save_videos 
-      uploads = youtube_client.my_videos(:user => google_given_name)
-      binding.pry
-      uploads.each do |upload|
-        video = Video.find_or_create_by(unique_id: upload.unique_id) 
-          video.unique_id = upload.unique_id 
-          video.description = upload.description
-          video.author = upload.author
-          video.thumbnail = upload.thumbnails[0].url
-          video.embeddable = upload.embeddable
-          video.published_at = upload.published_at
-          video.save!
-      end 
-  end 
 
+  def save_videos
+    uploads = self.youtube_client.my_videos(:user => google_fullname)
+    uploads.videos.each do |upload|
+      video = Video.find_or_create_by(unique_id: upload.unique_id) 
+      video.unique_id = upload.unique_id 
+      video.description = upload.description
+      video.author = upload.author.name
+      video.thumbnail = upload.thumbnails[0].url
+      video.embeddable = upload.embeddable?
+      video.published_at = upload.published_at
+      self.videos << video
+    end 
+  end 
 
 end
