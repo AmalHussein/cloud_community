@@ -10,6 +10,7 @@ CloudCommunity::Application.routes.draw do
     resources :songs, only: [:index, :show ]
   end 
 
+  get '/users/:id/media', to: 'media#show'
   root 'home#index'
   get 'auth/:provider/callback', to: 'authentications#create'
   get "authentications", to: 'authentications#index', as: 'authentications'

@@ -1,3 +1,35 @@
 // Place all the styles related to the media controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.full-top-bar {
+	width: 900px;
+	margin: auto; 
+ 	background: rgba(124,124,124,0.3100);
+
+}
+
+.media-container {
+	width: 900px;
+	margin: auto; 
+ 	background: rgba(184,184,124,0.3100);
+
+}
+
+.right-media-view {
+	width: 408px; 
+	height: 400px; 
+	display:inline-block;
+	background: rgba(104,104,124,0.3100);
+
+}
+
+.left-media-links {
+	width: 408px; 
+	height: 400px; 
+	display:inline-block;
+	background: rgba(103,111,224,0.3100);
+
+}
+
