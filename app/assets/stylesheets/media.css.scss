@@ -5,29 +5,38 @@
 
 .full-top-bar {
 	width: 900px;
+	height: 80px;
 	margin: auto; 
  	background: rgba(124,124,124,0.3100);
-
 }
 
 .media-container {
 	width: 900px;
 	margin: auto; 
  	background: rgba(184,184,124,0.3100);
-
 }
 
 .right-media-view {
 	width: 408px; 
 	height: 400px; 
+	padding: 19px;
+	margin: auto;
 	display:inline-block;
 	background: rgba(104,104,124,0.3100);
 
+}
+.username {
+	float:right;
+}
+.audio-video-tabs {
+	float: left;
 }
 
 .left-media-links {
 	width: 408px; 
 	height: 400px; 
+	padding: 19px;
+	margin: auto;
 	display:inline-block;
 	background: rgba(103,111,224,0.3100);
 
