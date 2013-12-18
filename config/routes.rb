@@ -1,6 +1,7 @@
 CloudCommunity::Application.routes.draw do
   
 
+  get "media/show"
   get "video/index"
   get "video/show"
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
