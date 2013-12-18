@@ -4,12 +4,12 @@ CloudCommunity::Application.routes.draw do
   get "video/index"
   get "video/show"
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
-  resources :users
+  resources :users do 
+    resources :videos, only: [:index, :show ]
+    resources :songs, only: [:index, :show ]
+  end 
+
   root 'home#index'
-  get 'videos', to: 'videos#index'
-  get 'video/:id', to: 'videos#show'
-  get 'song/:id', to: 'songs#show'
-  get 'songs', to: 'songs#index'
   get 'auth/:provider/callback', to: 'authentications#create'
   get "authentications", to: 'authentications#index', as: 'authentications'
   delete "authentications/delete", to: 'authentications#destroy', as: 'delete_authentication'
