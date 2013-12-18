@@ -144,27 +144,31 @@ class User < ActiveRecord::Base
   end
 
   def youtube_client 
-    YouTubeIt::OAuth2Client.new(
-      client_access_token: google_token, client_refresh_token: google_refresh_token,
-      client_id: ENV['GOOGLE_CLIENT_ID'], client_secret: ENV['GOOGLE_CLIENT_SECRET'], 
-      dev_key: ENV['GOOGLE_DEV_KEY'], expires_at: google_expires_at)
+   YouTubeIt::OAuth2Client.new(
+     client_access_token: google_token, client_refresh_token: google_refresh_token,
+     client_id: ENV['GOOGLE_CLIENT_ID'], client_secret: ENV['GOOGLE_CLIENT_SECRET'], 
+     dev_key: ENV['GOOGLE_DEV_KEY'], expires_at: google_expires_at)
+ end 
+
+
+ def save_videos
+  uploads = self.youtube_client.my_videos(:user => google_fullname)
+  uploads.videos.each do |upload|
+    video = Video.find_or_create_by(unique_id: upload.unique_id) 
+    video.unique_id = upload.unique_id 
+    video.description = upload.description
+    video.author = upload.author.name
+    video.thumbnail = upload.thumbnails[0].url
+    video.embeddable = upload.embeddable?
+    video.published_at = upload.published_at
+    self.videos << video
   end 
+end 
 
-
-  def save_videos
-    uploads = self.youtube_client.my_videos(:user => google_fullname)
-    uploads.videos.each do |upload|
-      video = Video.find_or_create_by(unique_id: upload.unique_id) 
-      video.unique_id = upload.unique_id 
-      video.description = upload.description
-      video.author = upload.author.name
-      video.thumbnail = upload.thumbnails[0].url
-      video.embeddable = upload.embeddable?
-      video.published_at = upload.published_at
-      self.videos << video
-    end 
-  end 
-
-  def 
+def soundclound_client
+  SoundCloud.new(client_id:ENV['SOUNDCLOUD_CLIENT_ID'],
+    client_secret: ENV['SOUNDCLOUD_CLIENT_SECRET'],
+    access_token: sc_token )
+end 
 
 end
