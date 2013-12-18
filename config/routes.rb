@@ -1,10 +1,13 @@
 CloudCommunity::Application.routes.draw do
   
 
+  get "video/index"
+  get "video/show"
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
   resources :users
   root 'home#index'
-
+  get 'videos', to: 'videos#index'
+  get 'video/:id', to: 'videos#show'
   get 'song/:id', to: 'songs#show'
   get 'songs', to: 'songs#index'
   get 'auth/:provider/callback', to: 'authentications#create'
