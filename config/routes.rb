@@ -5,6 +5,7 @@ CloudCommunity::Application.routes.draw do
   resources :users
   root 'home#index'
 
+  get 'song/:id', to: 'songs#show'
   get 'auth/:provider/callback', to: 'authentications#create'
   get "authentications", to: 'authentications#index', as: 'authentications'
   delete "authentications/delete", to: 'authentications#destroy', as: 'delete_authentication'
