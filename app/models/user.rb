@@ -115,6 +115,7 @@ class User < ActiveRecord::Base
   		user.sc_private_playlists_count = auth["extra"]["raw_info"]["private_playlists_count"]
   		user.sc_primary_email_confirmed = auth["extra"]["raw_info"]["primary_email_confirmed"]
   		user.save! 
+      user.save_songs
   	when "google_oauth2"
   		@authentication = Authentication.where(uid: auth["uid"])
   		user = @authentication.last.user 
@@ -172,7 +173,41 @@ def soundclound_client
     access_token: sc_token )
 end 
 
+#  id              :integer          not null, primary key
+#  user_id         :integer
+#  sc_id           :text
+#  song_created_at :datetime
+#  sc_user_id      :text
+#  duration        :integer
+#  sharing         :text
+#  embeddable_by   :text
+#  genre           :text
+#  title           :text
+#  description     :text
+#  uri             :text
+#  username        :text
+#  created_at      :datetime
+#  updated_at      :datetime
 
+def save_songs
+  uploads = self.soundclound_client.get("/me/tracks")
+  uploads.each do |upload|
+    song = Song.find_or_create_by(sc_id: upload.id.to_s)
+    song.sc_id = upload.id
+    song.song_created_at = upload.created_at
+    song.sc_user_id = upload.user_id
+    song.duration = upload.duration
+    song.sharing = upload.sharing 
+    song.embeddable_by = upload.embeddable_by
+    song.genre = upload.genre
+    song.title = upload.title
+    song.description = upload.description
+    song.uri = upload.uri
+    song.username = upload.user.username
+    self.songs << song
+  end 
+
+end 
 
 
 

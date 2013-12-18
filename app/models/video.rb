@@ -3,6 +3,7 @@
 # Table name: videos
 #
 #  id           :integer          not null, primary key
+#  user_id      :integer
 #  unique_id    :text
 #  description  :text
 #  author       :text
