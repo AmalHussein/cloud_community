@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable
   validates_presence_of :cc_username
   has_many :authentications
+  has_many :videos
   #attr_accessible :email, :password, :password_confirmation, :remember_me, :cc_username ADD STRONG PARAMS LATER
   
   #TODO consolidate cc_email and devise email field
@@ -82,7 +83,10 @@ class User < ActiveRecord::Base
       dev_key: ENV['GOOGLE_DEV_KEY'], expires_at: google_expires_at)
   end 
 
+  def self.show_videos 
+      uploads = youtube_client.video_
 
+  end 
 
 
 

@@ -96,6 +96,14 @@ ActiveRecord::Schema.define(version: 20131217161150) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "videos", force: true do |t|
+    t.text     "unique_id"
+    t.text     "description"
+    t.text     "author"
+    t.text     "thumbnail"
+    t.boolean  "embeddable"
+    t.integer  "duration"
+    t.text     "title"
+    t.datetime "published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
