@@ -12,7 +12,8 @@ class CreateSongs < ActiveRecord::Migration
       t.text :title
       t.text :description 
       t.text :uri
-      t.text :username 
+      t.text :username
+      t.text :permalink
       
       t.timestamps
     end

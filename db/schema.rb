@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20131218060829) do
     t.text     "description"
     t.text     "uri"
     t.text     "username"
+    t.text     "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -200,6 +200,7 @@ def save_songs
     song.sharing = upload.sharing 
     song.embeddable_by = upload.embeddable_by
     song.genre = upload.genre
+    song.permalink = upload.permalink
     song.title = upload.title
     song.description = upload.description
     song.uri = upload.uri
