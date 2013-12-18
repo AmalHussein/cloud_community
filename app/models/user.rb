@@ -76,6 +76,11 @@ class User < ActiveRecord::Base
   validates_presence_of :cc_username
   has_many :authentications
   has_many :videos
+
+  after_create :save_videos 
+  #, :unless => Proc.new{ self.google_fullname == nil }    
+  
+    
   #attr_accessible :email, :password, :password_confirmation, :remember_me, :cc_username ADD STRONG PARAMS LATER
   
   #TODO consolidate cc_email and devise email field
@@ -153,21 +158,20 @@ class User < ActiveRecord::Base
       dev_key: ENV['GOOGLE_DEV_KEY'], expires_at: google_expires_at)
   end 
 
-  # def self.show_videos 
-  #     uploads = youtube_client.my_videos(:user => google_given_name)
-  #     uploads.each do |video|
-  #       video.
-
-  # end 
-
-
-
-
-
-
-
-
-
+  def save_videos 
+      uploads = youtube_client.my_videos(:user => google_given_name)
+      binding.pry
+      uploads.each do |upload|
+        video = Video.find_or_create_by(unique_id: upload.unique_id) 
+          video.unique_id = upload.unique_id 
+          video.description = upload.description
+          video.author = upload.author
+          video.thumbnail = upload.thumbnails[0].url
+          video.embeddable = upload.embeddable
+          video.published_at = upload.published_at
+          video.save!
+      end 
+  end 
 
 
 end
