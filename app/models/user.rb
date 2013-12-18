@@ -76,6 +76,7 @@ class User < ActiveRecord::Base
   validates_presence_of :cc_username
   has_many :authentications
   has_many :videos
+  has_many :songs
 
   def self.login(auth)
     self.create_with_omniauth(auth)
@@ -170,5 +171,11 @@ def soundclound_client
     client_secret: ENV['SOUNDCLOUD_CLIENT_SECRET'],
     access_token: sc_token )
 end 
+
+
+
+
+
+
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131217161150) do
+ActiveRecord::Schema.define(version: 20131218060829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,25 @@ ActiveRecord::Schema.define(version: 20131217161150) do
   end
 
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
+
+  create_table "songs", force: true do |t|
+    t.integer  "user_id"
+    t.text     "sc_id"
+    t.datetime "song_created_at"
+    t.text     "sc_user_id"
+    t.integer  "duration"
+    t.text     "sharing"
+    t.text     "embeddable_by"
+    t.text     "genre"
+    t.text     "title"
+    t.text     "description"
+    t.text     "uri"
+    t.text     "username"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "songs", ["user_id"], name: "index_songs_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.text     "cc_username"
