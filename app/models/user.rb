@@ -1,3 +1,73 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                         :integer          not null, primary key
+#  cc_username                :text
+#  cc_email                   :text
+#  cc_first_name              :text
+#  cc_last_name               :text
+#  cc_birthday                :string(255)
+#  cc_zip_code                :string(255)
+#  provider                   :text
+#  sc_uid                     :text
+#  sc_id                      :text
+#  sc_nickname                :text
+#  sc_image                   :text
+#  sc_token                   :text
+#  sc_expires                 :boolean
+#  sc_kind                    :text
+#  sc_permalink               :text
+#  sc_username                :text
+#  sc_uri                     :text
+#  sc_permalink_url           :text
+#  sc_avatar_url              :text
+#  sc_online                  :boolean
+#  sc_track_count             :integer
+#  sc_playlist_count          :integer
+#  sc_plan                    :text
+#  sc_public_favorites_count  :integer
+#  sc_followers_count         :integer
+#  sc_followings_count        :integer
+#  sc_upload_seconds_left     :integer
+#  sc_unlimited_upload_quota  :boolean
+#  sc_upload_seconds_used     :integer
+#  sc_private_tracks_count    :integer
+#  sc_private_playlists_count :integer
+#  sc_primary_email_confirmed :boolean
+#  google_uid                 :text
+#  google_fullname            :text
+#  google_first_name          :text
+#  google_last_name           :text
+#  google_image               :text
+#  google_link                :text
+#  google_plus_profile        :text
+#  google_id                  :text
+#  google_email               :text
+#  google_verified_email      :boolean
+#  google_token               :text
+#  google_expires_at          :integer
+#  google_expires             :boolean
+#  google_refresh_token       :text
+#  google_given_name          :text
+#  google_family_name         :text
+#  google_picture             :text
+#  google_gender              :text
+#  google_locale              :text
+#  created_at                 :datetime
+#  updated_at                 :datetime
+#  email                      :string(255)      default(""), not null
+#  encrypted_password         :string(255)      default(""), not null
+#  reset_password_token       :string(255)
+#  reset_password_sent_at     :datetime
+#  remember_created_at        :datetime
+#  sign_in_count              :integer          default(0), not null
+#  current_sign_in_at         :datetime
+#  last_sign_in_at            :datetime
+#  current_sign_in_ip         :string(255)
+#  last_sign_in_ip            :string(255)
+#
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -83,10 +153,12 @@ class User < ActiveRecord::Base
       dev_key: ENV['GOOGLE_DEV_KEY'], expires_at: google_expires_at)
   end 
 
-  def self.show_videos 
-      uploads = youtube_client.video_
+  # def self.show_videos 
+  #     uploads = youtube_client.my_videos(:user => google_given_name)
+  #     uploads.each do |video|
+  #       video.
 
-  end 
+  # end 
 
 
 
