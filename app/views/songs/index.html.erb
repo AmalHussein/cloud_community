@@ -4,18 +4,20 @@
 
 <script>
 $(document).ready(function(){
-	$("#song").width('50%');
+	$(".songs-list").width('50%');
 }); 
 </script>
 
 
 <div id='soundcloud'>
 <% @songs.each do |song| %>
+		</br>
 	  <% client = Soundcloud.new(:client_id => ENV['SOUNDCLOUD_CLIENT_ID']) %>
 		<% embed_info = client.get('/oembed', :url => "http://soundcloud.com/#{song.username}/#{song.permalink}") %>
 		<% @iframe_content = embed_info['html']  %>
-		<% @iframe_content.sub!('iframe ', "iframe id='song-#{song.id}' ") %>
+		<% @iframe_content.sub!('iframe ', "iframe class='songs-list' ") %>
 		<%= @iframe_content.html_safe %>
+		</br>
 	<% end %>
 </div>
 
