@@ -4,13 +4,12 @@
 
 <script>
 $(document).ready(function(){
-	$("#song-<%=@song.id%>").width('50%');
+	$("iframe").width('50%');
 }); 
 </script>
 
-
 <div id='soundcloud'>
-	<%= @iframe_content.html_safe %>
+	<%= @song.iframe_markup.html_safe %>
 </div>
 
 

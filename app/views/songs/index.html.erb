@@ -1,23 +1,14 @@
 
-<script src="https://w.soundcloud.com/player/api.js"></script>
-<script src="http://connect.soundcloud.com/sdk.js"></script>
-
 <script>
 $(document).ready(function(){
-	$(".songs-list").width('50%');
+	$("iframe").width('50%');
 }); 
 </script>
 
 
 <div id='soundcloud'>
 <% @songs.each do |song| %>
-		</br>
-	  <% client = Soundcloud.new(:client_id => ENV['SOUNDCLOUD_CLIENT_ID']) %>
-		<% embed_info = client.get('/oembed', :url => "http://soundcloud.com/#{song.username}/#{song.permalink}") %>
-		<% @iframe_content = embed_info['html']  %>
-		<% @iframe_content.sub!('iframe ', "iframe class='songs-list' ") %>
-		<%= @iframe_content.html_safe %>
-		</br>
+		<%= song.iframe_markup.html_safe %>
 	<% end %>
 </div>
 
