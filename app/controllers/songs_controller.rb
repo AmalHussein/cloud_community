@@ -10,7 +10,6 @@ class SongsController < ApplicationController
 		embed_info = client.get('/oembed', :url => "http://soundcloud.com/#{@song.username}/#{@song.permalink}")
 		@iframe_content = embed_info['html'] 
 		@iframe_content.sub!('iframe ', "iframe id='song-#{@song.id}' ")
-		binding.pry
 	end 
 
 end 

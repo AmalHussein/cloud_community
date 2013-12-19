@@ -82,7 +82,6 @@ class User < ActiveRecord::Base
     self.create_with_omniauth(auth)
   end
 
-
   def self.create_with_omniauth(auth)
   	case auth["provider"]
   	when "soundcloud"
@@ -116,7 +115,6 @@ class User < ActiveRecord::Base
   		user.sc_primary_email_confirmed = auth["extra"]["raw_info"]["primary_email_confirmed"]
   		user.save! 
       user.save_songs
-      user.sc_iframe
   	when "google_oauth2"
   		@authentication = Authentication.where(uid: auth["uid"])
   		user = @authentication.last.user 
@@ -142,7 +140,6 @@ class User < ActiveRecord::Base
   		user.google_gender = auth["extra"]["raw_info"]["gender"]
   		user.google_locale = auth["extra"]["raw_info"]["locale"]
   		user.save!
-      user.save_videos
     end
   end
 
@@ -152,7 +149,6 @@ class User < ActiveRecord::Base
      client_id: ENV['GOOGLE_CLIENT_ID'], client_secret: ENV['GOOGLE_CLIENT_SECRET'], 
      dev_key: ENV['GOOGLE_DEV_KEY'], expires_at: google_expires_at)
  end 
-
 
  def save_videos
   uploads = self.youtube_client.my_videos(:user => google_fullname)
@@ -174,22 +170,6 @@ def soundclound_client
     access_token: sc_token )
 end 
 
-#  id              :integer          not null, primary key
-#  user_id         :integer
-#  sc_id           :text
-#  song_created_at :datetime
-#  sc_user_id      :text
-#  duration        :integer
-#  sharing         :text
-#  embeddable_by   :text
-#  genre           :text
-#  title           :text
-#  description     :text
-#  uri             :text
-#  username        :text
-#  created_at      :datetime
-#  updated_at      :datetime
-
 def save_songs
   uploads = self.soundclound_client.get("/me/tracks")
   uploads.each do |upload|
@@ -206,20 +186,10 @@ def save_songs
     song.description = upload.description
     song.uri = upload.uri
     song.username = upload.user.username
+    song.save_iframe
     self.songs << song
   end 
 end 
-
-def sc_iframe 
-    user.songs.each do |song|
-    embed_info = self.soundclound_client.get('/oembed', :url => "http://soundcloud.com/#{song.username}/#{song.permalink}")
-    song.iframe_markup = embed_info['html'] 
-    binding.pry
-    song.iframe_markup.sub!('iframe ', "iframe id='song-#{song.id}' ")
-  end 
-end 
-
-
 
 
 end

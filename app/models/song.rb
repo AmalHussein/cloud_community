@@ -15,23 +15,23 @@
 #  description     :text
 #  uri             :text
 #  username        :text
+#  permalink       :text
+#  iframe_markup   :text
 #  created_at      :datetime
 #  updated_at      :datetime
 #
 
 class Song < ActiveRecord::Base
   belongs_to :user
+ 
+	def client 
+		Soundcloud.new(:client_id => ENV['SOUNDCLOUD_CLIENT_ID'])
+	end 
 
-
-#attempt to move these methods into the model, and out of controller. 
-def self.display
-  client = Soundcloud.new(:client_id => ENV['SOUNDCLOUD_CLIENT_ID'])
-	embed_info = client.get('/oembed', :url => "http://soundcloud.com/#{@song.username}/#{@song.permalink}")
-	@iframe_content = embed_info['html'] 
-	@iframe_content.sub!('iframe ', "iframe id='song-#{@song.id}' ")
-end
-
-
+	def save_iframe
+	  embed_info = self.client.get('/oembed', :url => "http://soundcloud.com/#{username}/#{permalink}")
+	  self.iframe_markup = embed_info['html'] 
+	end
 
 end
 
