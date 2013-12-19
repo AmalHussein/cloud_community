@@ -1,4 +1,9 @@
 
 <% @comments.each do |comment| %>
-<%= comment.content %>
+<%= simple_format comment.content %>
+<%=  comment.created_at %> 
 <% end %>
+
+<%= link_to 'New Comment', [:new, @commentable.user,  @commentable, :comment] %>
+
+

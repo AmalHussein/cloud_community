@@ -1,7 +1,9 @@
 class CommentsController < ApplicationController
 
+	before_filter :load_commentable
+
   def index
-  	@commentable = Video.find(params[:video_id])
+  	#binding.pry
   	@comments = @commentable.comments
   end
 
@@ -13,4 +15,12 @@ class CommentsController < ApplicationController
 
   def edit
   end
+
+  private 
+
+  def load_commentable 
+  	resource, id = request.path.split('/')[3, 4]
+  	@commentable = resource.singularize.classify.constantize.find(id)
+  end 
+
 end
