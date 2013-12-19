@@ -13,7 +13,8 @@ class CreateSongs < ActiveRecord::Migration
       t.text :description 
       t.text :uri
       t.text :username 
-      
+      t.text :view_status, default: "private"
+      t.text :icon
       t.timestamps
     end
   end

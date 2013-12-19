@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 20131219123048) do
     t.text     "description"
     t.text     "uri"
     t.text     "username"
-    t.text     "permalink"
-    t.text     "iframe_markup"
+    t.text     "view_status",     default: "private"
+    t.text     "icon"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20131219123048) do
     t.text     "cc_last_name"
     t.string   "cc_birthday"
     t.string   "cc_zip_code"
+    t.text     "cc_avatar"
     t.text     "provider"
     t.text     "sc_uid"
     t.text     "sc_id"
@@ -144,6 +145,8 @@ ActiveRecord::Schema.define(version: 20131219123048) do
     t.integer  "duration"
     t.text     "title"
     t.datetime "published_at"
+    t.text     "view_status",  default: "private"
+    t.text     "icon"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

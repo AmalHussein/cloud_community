@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration
     	t.text :cc_last_name
     	t.string :cc_birthday
     	t.string :cc_zip_code
+      t.text    :cc_avatar
       t.text :provider
       t.text :sc_uid, :limit => 8 #usually the same as id == uid
       t.text :sc_id
@@ -42,8 +43,8 @@ class CreateUsers < ActiveRecord::Migration
       t.text    :google_plus_profile
       t.text    :google_id
       t.text    :google_email
-      t.boolean    :google_verified_email 
-      t.text :google_token
+      t.boolean  :google_verified_email 
+      t.text     :google_token
       t.integer :google_expires_at
       t.boolean :google_expires 
       t.text    :google_refresh_token
