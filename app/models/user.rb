@@ -70,15 +70,23 @@
 
 class User < ActiveRecord::Base
 
-  devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :trackable, :validatable
+  devise  :database_authenticatable,
+          :registerable,
+          :recoverable,
+          :rememberable,
+          :trackable,
+          :validatable
 
-  validates_presence_of :cc_username
+  
   has_many :authentications
   has_many :videos
   has_many :songs
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :avatar, styles: {  medium: "300x300>",
+                                        thumb: "100x100>" },
+                                        default_url: "/images/:style/missing.png"
+
+  validates :cc_username, presence: true
 
   def self.login(auth)
     self.create_with_omniauth(auth)
@@ -152,47 +160,45 @@ class User < ActiveRecord::Base
      client_access_token: google_token, client_refresh_token: google_refresh_token,
      client_id: ENV['GOOGLE_CLIENT_ID'], client_secret: ENV['GOOGLE_CLIENT_SECRET'], 
      dev_key: ENV['GOOGLE_DEV_KEY'], expires_at: google_expires_at)
- end 
-
-
- def save_videos
-  uploads = self.youtube_client.my_videos(:user => google_fullname)
-  uploads.videos.each do |upload|
-    video = Video.find_or_create_by(unique_id: upload.unique_id) 
-    video.unique_id = upload.unique_id 
-    video.description = upload.description
-    video.author = upload.author.name
-    video.thumbnail = upload.thumbnails[0].url
-    video.embeddable = upload.embeddable?
-    video.published_at = upload.published_at
-    self.videos << video
   end 
-end 
 
-def soundclound_client
-  SoundCloud.new(client_id:ENV['SOUNDCLOUD_CLIENT_ID'],
-    client_secret: ENV['SOUNDCLOUD_CLIENT_SECRET'],
-    access_token: sc_token )
-end 
 
-def save_songs
-  uploads = self.soundclound_client.get("/me/tracks")
-  uploads.each do |upload|
-    song = Song.find_or_create_by(sc_id: upload.id.to_s)
-    song.sc_id = upload.id
-    song.song_created_at = upload.created_at
-    song.sc_user_id = upload.user_id
-    song.duration = upload.duration
-    song.sharing = upload.sharing 
-    song.embeddable_by = upload.embeddable_by
-    song.genre = upload.genre
-    song.title = upload.title
-    song.description = upload.description
-    song.uri = upload.uri
-    song.username = upload.user.username
-    self.songs << song
+  def save_videos
+    uploads = self.youtube_client.my_videos(:user => google_fullname)
+    uploads.videos.each do |upload|
+      video = Video.find_or_create_by(unique_id: upload.unique_id) 
+      video.unique_id = upload.unique_id 
+      video.description = upload.description
+      video.author = upload.author.name
+      video.thumbnail = upload.thumbnails[0].url
+      video.embeddable = upload.embeddable?
+      video.published_at = upload.published_at
+      self.videos << video
+    end 
   end 
-end 
 
+  def soundclound_client
+    SoundCloud.new(client_id:ENV['SOUNDCLOUD_CLIENT_ID'],
+      client_secret: ENV['SOUNDCLOUD_CLIENT_SECRET'],
+      access_token: sc_token )
+  end 
 
+  def save_songs
+    uploads = self.soundclound_client.get("/me/tracks")
+    uploads.each do |upload|
+      song = Song.find_or_create_by(sc_id: upload.id.to_s)
+      song.sc_id = upload.id
+      song.song_created_at = upload.created_at
+      song.sc_user_id = upload.user_id
+      song.duration = upload.duration
+      song.sharing = upload.sharing 
+      song.embeddable_by = upload.embeddable_by
+      song.genre = upload.genre
+      song.title = upload.title
+      song.description = upload.description
+      song.uri = upload.uri
+      song.username = upload.user.username
+      self.songs << song
+    end 
+  end 
 end
