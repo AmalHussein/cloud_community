@@ -1,6 +1,10 @@
 CloudCommunity::Application.routes.draw do
   
 
+  get "comments/index"
+  get "comments/new"
+  get "comments/update"
+  get "comments/edit"
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, controllers: { registrations: "registrations" }
 
   resources :users do 
