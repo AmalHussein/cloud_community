@@ -15,11 +15,11 @@
 $(document).ready(function() {
 
 	$('.song-link').click(function(event){
-			event.preventDefault()
-
-				var iframeMarkup = $('.song-link').data('iframe-markup');
-				$('#iframe-container').html(iframeMarkup);
-			});
+		var iframeMarkup;
+		event.preventDefault();
+		iframeMarkup = $('.song-link').data('iframe-markup');
+		$('#iframe-container').html(iframeMarkup);
+	});
 
 });
 

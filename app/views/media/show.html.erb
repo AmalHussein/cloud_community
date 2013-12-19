@@ -1,5 +1,3 @@
-
-
 <body>
 	<div class="container">
 		<div class="full-top-bar">
@@ -15,20 +13,21 @@
 			<!-- links and thumbnails displayed here -->
 			<div class= "left-media-links">
 				VIDEO & AUDIO LINKS HERE
-				<div class="video-links" style='display:none'><%= render partial: 'video' , collection: @user.videos %></div>
-				<div class="audio-links"><%= render partial: 'song' , collection: @user.songs %></div>
-			</div>
-		</div>
-
-		<!-- videos and audio display here -->
-		<div class="right-media-view">
-			VIDEO & AUDIO STREAMING HERE
-			<div class="media">
-				<div id='iframe-container'>
+				<div class="video-links">
+					<%= render partial: 'video' , collection: @user.videos %>
+				</div>
+				<div class="audio-links">
+					<%= render partial: 'song' , collection: @user.songs %>
 				</div>
 			</div>
-			<div class"comments"></div>
-		</div>	
+			<div class="right-media-view">
+				VIDEO & AUDIO STREAMING HERE
+				<div class="media">
+					<div id='iframe-container'>
+					</div>
+				</div>
+				<div class"comments"></div>
+			</div>	
+		</div>
 	</div>
-
 </body>

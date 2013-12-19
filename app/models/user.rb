@@ -151,6 +151,7 @@ class User < ActiveRecord::Base
   		user.google_gender = auth["extra"]["raw_info"]["gender"]
   		user.google_locale = auth["extra"]["raw_info"]["locale"]
   		user.save!
+      user.save_videos
     end
   end
 

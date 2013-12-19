@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20131219140335) do
     t.text     "username"
     t.text     "view_status",     default: "private"
     t.text     "icon"
+    t.text     "permalink"
+    t.text     "iframe_markup"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
