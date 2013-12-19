@@ -77,6 +77,7 @@ class User < ActiveRecord::Base
   has_many :authentications
   has_many :videos
   has_many :songs
+  has_many :instruments
 
   def self.login(auth)
     self.create_with_omniauth(auth)
