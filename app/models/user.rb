@@ -115,11 +115,11 @@ class User < ActiveRecord::Base
   		user.sc_primary_email_confirmed = auth["extra"]["raw_info"]["primary_email_confirmed"]
   		user.save! 
       user.save_songs
-  	when "google_oauth2"
-  		@authentication = Authentication.where(uid: auth["uid"])
-  		user = @authentication.last.user 
-  		user.google_uid = auth["uid"]
-  		user.google_fullname = auth["info"]["name"]
+    when "google_oauth2"
+      @authentication = Authentication.where(uid: auth["uid"])
+      user = @authentication.last.user 
+      user.google_uid = auth["uid"]
+      user.google_fullname = auth["info"]["name"]
   		#user.google_email = auth["info"]["email"] #email repeat
   		#user.google_first_name = auth["info"]["first_name"] #same repeat 
   		user.google_last_name = auth["info"]["last_name"]

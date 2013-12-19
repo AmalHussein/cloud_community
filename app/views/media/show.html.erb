@@ -12,7 +12,7 @@
 
 		<div class="media-container">
 			
-	<!-- links and thumbnails displayed here -->
+			<!-- links and thumbnails displayed here -->
 			<div class= "left-media-links">
 				VIDEO & AUDIO LINKS HERE
 				<div class="video-links" style='display:none'><%= render partial: 'video' , collection: @user.videos %></div>
@@ -20,21 +20,15 @@
 			</div>
 		</div>
 
-			<!-- videos and audio display here -->
-			<div class="right-media-view">
-				VIDEO & AUDIO STREAMING HERE
-				<div class="media">
-					<div id='iframe-container'>
-					</div>
+		<!-- videos and audio display here -->
+		<div class="right-media-view">
+			VIDEO & AUDIO STREAMING HERE
+			<div class="media">
+				<div id='iframe-container'>
 				</div>
-				<div class"comments"></div>
-			</div>	
+			</div>
+			<div class"comments"></div>
+		</div>	
 	</div>
-
-
-
-
-
-
 
 </body>
