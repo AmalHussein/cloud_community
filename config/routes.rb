@@ -4,7 +4,18 @@ CloudCommunity::Application.routes.draw do
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, controllers: { registrations: "registrations" }
   resources :users
   root 'home#index'
+  get "media/show"
+  get "video/index"
+  get "video/show"
+  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
+  resources :users do 
+    resources :videos, only: [:index, :show ]
+    resources :songs, only: [:index, :show ]
+  end 
 
+
+  get '/users/:id/media', to: 'media#show'
+  root 'home#index'
   get 'auth/:provider/callback', to: 'authentications#create'
   get "authentications", to: 'authentications#index', as: 'authentications'
   delete "authentications/delete", to: 'authentications#destroy', as: 'delete_authentication'

@@ -1,0 +1,15 @@
+
+<script src="https://w.soundcloud.com/player/api.js"></script>
+<script src="http://connect.soundcloud.com/sdk.js"></script>
+
+<script>
+$(document).ready(function(){
+	$("iframe").width('50%');
+}); 
+</script>
+
+<div id='soundcloud'>
+	<%= @song.iframe_markup.html_safe %>
+</div>
+
+

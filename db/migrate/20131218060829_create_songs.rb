@@ -15,6 +15,11 @@ class CreateSongs < ActiveRecord::Migration
       t.text :username 
       t.text :view_status, default: "private"
       t.text :icon
+      t.text :username
+      t.text :permalink
+      t.text :iframe_markup
+      
+
       t.timestamps
     end
   end

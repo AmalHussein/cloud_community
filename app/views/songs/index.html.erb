@@ -1,0 +1,15 @@
+
+<script>
+$(document).ready(function(){
+	$("iframe").width('50%');
+}); 
+</script>
+
+
+<div id='soundcloud'>
+<% @songs.each do |song| %>
+		<%= song.iframe_markup.html_safe %>
+	<% end %>
+</div>
+
+

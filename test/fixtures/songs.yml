@@ -15,6 +15,8 @@
 #  description     :text
 #  uri             :text
 #  username        :text
+#  permalink       :text
+#  iframe_markup   :text
 #  created_at      :datetime
 #  updated_at      :datetime
 #

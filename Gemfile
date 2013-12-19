@@ -18,6 +18,8 @@ gem 'omniauth-soundcloud'
 gem 'devise'
 gem 'annotate'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem 'ruby-oembed'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
