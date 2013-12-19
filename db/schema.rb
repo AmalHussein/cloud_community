@@ -151,8 +151,9 @@ ActiveRecord::Schema.define(version: 20131219140335) do
     t.integer  "duration"
     t.text     "title"
     t.datetime "published_at"
-    t.text     "view_status",  default: "private"
+    t.text     "view_status",    default: "private"
     t.text     "icon"
+    t.text     "youtube_iframe"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -18,4 +18,13 @@
 
 class Video < ActiveRecord::Base
 	belongs_to :user 
+
+
+	def save_iframe
+		iframe = "<iframe width=" + "525" + "height=" + "400" +
+		"src=" + "//www.youtube.com/embed/#{unique_id} 
+		frameborder=" + "0" + "allowfullscreen></iframe>"
+		self.youtube_iframe = iframe
+	end 
+
 end
