@@ -4,8 +4,12 @@ CloudCommunity::Application.routes.draw do
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, controllers: { registrations: "registrations" }
 
   resources :users do 
-    resources :videos, only: [:index, :show ]
-    resources :songs, only: [:index, :show ]
+    resources :videos, only: [:index, :show ] do 
+       resources :comments
+      end
+    resources :songs, only: [:index, :show ] do 
+      resources :comments
+      end 
   end 
 
 
