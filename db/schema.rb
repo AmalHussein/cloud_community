@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218060829) do
+ActiveRecord::Schema.define(version: 20131219140335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20131218060829) do
 
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
+  create_table "instruments", force: true do |t|
+    t.text     "name"
+    t.text     "image_icon"
+    t.text     "hover_icon"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "songs", force: true do |t|
     t.integer  "user_id"
     t.text     "sc_id"
@@ -39,6 +48,8 @@ ActiveRecord::Schema.define(version: 20131218060829) do
     t.text     "description"
     t.text     "uri"
     t.text     "username"
+    t.text     "view_status",     default: "private"
+    t.text     "icon"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -52,6 +63,7 @@ ActiveRecord::Schema.define(version: 20131218060829) do
     t.text     "cc_last_name"
     t.string   "cc_birthday"
     t.string   "cc_zip_code"
+    t.text     "cc_avatar"
     t.text     "provider"
     t.text     "sc_uid"
     t.text     "sc_id"
@@ -109,10 +121,23 @@ ActiveRecord::Schema.define(version: 20131218060829) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "users_intruments", id: false, force: true do |t|
+    t.integer "user_id"
+    t.integer "instrument_id"
+  end
+
+  add_index "users_intruments", ["instrument_id"], name: "index_users_intruments_on_instrument_id", using: :btree
+  add_index "users_intruments", ["user_id", "instrument_id"], name: "index_users_intruments_on_user_id_and_instrument_id", using: :btree
+  add_index "users_intruments", ["user_id"], name: "index_users_intruments_on_user_id", using: :btree
 
   create_table "videos", force: true do |t|
     t.integer  "user_id"
@@ -124,6 +149,8 @@ ActiveRecord::Schema.define(version: 20131218060829) do
     t.integer  "duration"
     t.text     "title"
     t.datetime "published_at"
+    t.text     "view_status",  default: "private"
+    t.text     "icon"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

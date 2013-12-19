@@ -69,14 +69,16 @@
 #
 
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
+
   validates_presence_of :cc_username
   has_many :authentications
   has_many :videos
   has_many :songs
+
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
 
   def self.login(auth)
     self.create_with_omniauth(auth)
@@ -116,11 +118,11 @@ class User < ActiveRecord::Base
   		user.sc_primary_email_confirmed = auth["extra"]["raw_info"]["primary_email_confirmed"]
   		user.save! 
       user.save_songs
-  	when "google_oauth2"
-  		@authentication = Authentication.where(uid: auth["uid"])
-  		user = @authentication.last.user 
-  		user.google_uid = auth["uid"]
-  		user.google_fullname = auth["info"]["name"]
+    when "google_oauth2"
+      @authentication = Authentication.where(uid: auth["uid"])
+      user = @authentication.last.user 
+      user.google_uid = auth["uid"]
+      user.google_fullname = auth["info"]["name"]
   		#user.google_email = auth["info"]["email"] #email repeat
   		#user.google_first_name = auth["info"]["first_name"] #same repeat 
   		user.google_last_name = auth["info"]["last_name"]
@@ -173,22 +175,6 @@ def soundclound_client
     access_token: sc_token )
 end 
 
-#  id              :integer          not null, primary key
-#  user_id         :integer
-#  sc_id           :text
-#  song_created_at :datetime
-#  sc_user_id      :text
-#  duration        :integer
-#  sharing         :text
-#  embeddable_by   :text
-#  genre           :text
-#  title           :text
-#  description     :text
-#  uri             :text
-#  username        :text
-#  created_at      :datetime
-#  updated_at      :datetime
-
 def save_songs
   uploads = self.soundclound_client.get("/me/tracks")
   uploads.each do |upload|
@@ -207,9 +193,6 @@ def save_songs
     self.songs << song
   end 
 end 
-
-
-
 
 
 end
