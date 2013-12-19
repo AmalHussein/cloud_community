@@ -82,6 +82,7 @@ class User < ActiveRecord::Base
   has_many :videos
   has_many :songs
   has_many :instruments
+  has_many :comments, as: :commentable
 
   has_attached_file :avatar, styles: {  medium: "300x300>",
                                         thumb: "100x100>" },

@@ -17,7 +17,8 @@
 #
 
 class Video < ActiveRecord::Base
-	belongs_to :user 
+	belongs_to :user
+	has_many :comments, as: :commentable
 
 	def save_iframe
 		iframe = "<iframe width='525' height='400' src='//www.youtube.com/embed/#{unique_id}' frameborder='0' allowfullscreen></iframe>"

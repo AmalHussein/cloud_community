@@ -23,6 +23,7 @@
 
 class Song < ActiveRecord::Base
   belongs_to :user
+  has_many :comments, as: :commentable
  
 	def client 
 		Soundcloud.new(:client_id => ENV['SOUNDCLOUD_CLIENT_ID'])
