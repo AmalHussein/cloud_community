@@ -11,23 +11,26 @@
 		</div>
 
 		<div class="media-container">
+			
+	<!-- links and thumbnails displayed here -->
+			<div class= "left-media-links">
+				VIDEO & AUDIO LINKS HERE
+				<div class="video-links" style='display:none'><%= render partial: 'video' , collection: @user.videos %></div>
+				<div class="audio-links"><%= render partial: 'song' , collection: @user.songs %></div>
+			</div>
+		</div>
+
 			<!-- videos and audio display here -->
 			<div class="right-media-view">
 				VIDEO & AUDIO STREAMING HERE
 				<div class="media">
-					<div class="video-view"><%= render partial: "videos/index", collection: @user.videos %></div>
-					<div class="audio-view"><%= render partial: "songs/index", collection: @user.videos %></div>
+					<div id='iframe-container'>
+					</div>
 				</div>
 				<div class"comments"></div>
 			</div>
 
-			<!-- links and thumbnails displayed here -->
-			<div class= "left-media-links">
-				VIDEO & AUDIO LINKS HERE
-				<div class="audio-links"><%= render partial: "songs/show", collection: @user.videos %></div>
-				<div class="video-links"><%= render partial: "videos/show", collection: @user.videos %></div>
-			</div>
-		</div>
+		
 		
 	</div>
 
