@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20131218060829) do
     t.text     "uri"
     t.text     "username"
     t.text     "permalink"
+    t.text     "iframe_markup"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

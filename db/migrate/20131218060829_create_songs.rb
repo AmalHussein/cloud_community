@@ -14,6 +14,7 @@ class CreateSongs < ActiveRecord::Migration
       t.text :uri
       t.text :username
       t.text :permalink
+      t.text :iframe_markup
       
       t.timestamps
     end

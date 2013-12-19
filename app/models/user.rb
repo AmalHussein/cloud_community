@@ -116,6 +116,7 @@ class User < ActiveRecord::Base
   		user.sc_primary_email_confirmed = auth["extra"]["raw_info"]["primary_email_confirmed"]
   		user.save! 
       user.save_songs
+      user.sc_iframe
   	when "google_oauth2"
   		@authentication = Authentication.where(uid: auth["uid"])
   		user = @authentication.last.user 
@@ -209,6 +210,14 @@ def save_songs
   end 
 end 
 
+def sc_iframe 
+    user.songs.each do |song|
+    embed_info = self.soundclound_client.get('/oembed', :url => "http://soundcloud.com/#{song.username}/#{song.permalink}")
+    song.iframe_markup = embed_info['html'] 
+    binding.pry
+    song.iframe_markup.sub!('iframe ', "iframe id='song-#{song.id}' ")
+  end 
+end 
 
 
 
