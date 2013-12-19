@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.container {
+	margin-top: 175px;
+}
+
 
 .full-top-bar {
 	width: 900px;
@@ -31,7 +35,26 @@
 }
 .audio-video-tabs {
 	float: left;
+	height: 70px;
+	width: 400px;
+	border: black solid; 
+
 }
+
+.audio-tab {
+	float: left;
+	height: 70px;
+	width: 195px;
+	background-color: orange;
+}
+
+.video-tab {
+	float: right;
+	height: 70px;
+	width: 195px;
+	background-color: blue;
+}
+
 
 .left-media-links {
 	width: 408px; 

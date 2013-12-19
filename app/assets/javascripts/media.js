@@ -14,4 +14,21 @@ $(document).ready(function() {
 		youtubeIframe =$('.video-link').data('youtube-iframe')
 		$('#iframe-container').html(youtubeIframe);
 	});
+
+	$('.audio-links').hide();
+
+	$('#soundcloud').click(function(event){
+		event.preventDefault();
+		$('.video-links').hide();
+		$('.audio-links').show();
+	});
+
+	$('#youtube').click(function(event){
+		event.preventDefault();
+		$('.audio-links').hide();
+		$('.video-links').show();
+		
+
+	});
+
 });
