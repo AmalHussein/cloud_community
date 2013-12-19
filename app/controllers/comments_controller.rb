@@ -10,7 +10,6 @@ class CommentsController < ApplicationController
   	@comment = @commentable.comments.new 
   end
 
-
   def create
     @comment = @commentable.comments.new(comment_params)
     if @comment.save

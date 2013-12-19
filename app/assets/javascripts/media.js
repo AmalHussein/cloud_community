@@ -6,6 +6,9 @@ $(document).ready(function() {
 		event.preventDefault();
 		iframeMarkup = $('.song-link').data('iframe-markup');
 		$('#iframe-container').html(iframeMarkup);
+
+
+		
 	});
 
 	$('.video-link').click(function(event){
