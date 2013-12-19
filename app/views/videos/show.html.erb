@@ -1,3 +1,1 @@
-<iframe width="525" height="400" 
-src="//www.youtube.com/embed/<%= video.unique_id %>" 
-frameborder="0" allowfullscreen></iframe>
+<%= @video.youtube_iframe.html_safe %>
