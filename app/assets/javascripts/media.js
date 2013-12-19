@@ -26,9 +26,7 @@ $(document).ready(function() {
 	$('#youtube').click(function(event){
 		event.preventDefault();
 		$('.audio-links').hide();
-		$('.video-links').show();
-		
-
+		$('.video-links').show();	
 	});
 
 });
