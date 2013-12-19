@@ -172,6 +172,7 @@ class User < ActiveRecord::Base
     video.thumbnail = upload.thumbnails[0].url
     video.embeddable = upload.embeddable?
     video.published_at = upload.published_at
+    video.save_iframe
     self.videos << video
   end 
 end 
