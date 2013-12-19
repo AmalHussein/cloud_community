@@ -11,6 +11,7 @@ $(document).ready(function() {
 	$('.video-link').click(function(event){
 		var youtubeIframe;
 		event.preventDefault();
-		youtubeIframe =$('.video-link').html(youtubeIframe);
+		youtubeIframe =$('.video-link').data('youtube-iframe')
+		$('#iframe-container').html(youtubeIframe);
 	});
 });
