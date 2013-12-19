@@ -10,6 +10,8 @@ class CreateVideos < ActiveRecord::Migration
     	t.integer :duration 
     	t.text :title
     	t.datetime :published_at
+      t.text :view_status, default: "private"
+      t.text :icon
 
       t.timestamps
     end
