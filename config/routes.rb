@@ -2,12 +2,7 @@ CloudCommunity::Application.routes.draw do
   
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, controllers: { registrations: "registrations" }
-  resources :users
-  root 'home#index'
-  get "media/show"
-  get "video/index"
-  get "video/show"
-  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
+
   resources :users do 
     resources :videos, only: [:index, :show ]
     resources :songs, only: [:index, :show ]
