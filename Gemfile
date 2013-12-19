@@ -7,7 +7,7 @@ gem 'rails', '4.0.1'
 gem 'pg'
 
 gem 'pry-rails'
-# gem 'better_errors'
+gem 'better_errors'
 gem 'dotenv-rails'
 gem 'omniauth-google-oauth2'
 gem 'youtube_it'
@@ -17,6 +17,7 @@ gem 'rails_12factor'
 gem 'omniauth-soundcloud'
 gem 'devise'
 gem 'annotate'
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
