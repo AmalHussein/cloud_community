@@ -1,11 +1,25 @@
 
-$(document).ready(function(){
+// $(document).ready(function(){
 
-	$('.song-link').each(function(songLinkEl){
-		songLinkEl.on('click', function(evt){
-		 var iframeMarkup = songLinkEl.data('iframe-markup');
-		 $('#iframe-container').html(iframeMarkup);
-		 // not sure of syntax preventDefault();
-		});
-	}
-})
+// 	$('.song-link').each(function(songLinkEl){
+// 		songLinkEl.on('click', function(event){ 
+// 			event.preventDefault();
+
+// 		 var iframeMarkup = songLinkEl.data('iframe-markup');
+// 		 $('#iframe-container').html(iframeMarkup);
+// 		});
+// 	}
+// })
+
+
+$(document).ready(function() {
+
+	$('.song-link').click(function(event){
+			event.preventDefault()
+
+				var iframeMarkup = $('.song-link').data('iframe-markup');
+				$('#iframe-container').html(iframeMarkup);
+			});
+
+});
+
