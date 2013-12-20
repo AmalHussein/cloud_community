@@ -19,3 +19,11 @@
   </div>
 <% end %>
 </div>
+
+<div>
+  <h2>Friended by Users</h2>
+<ul>
+  <% @user.inverse_friends.each do | user| %>
+    <li><%= user.cc_username %></li>
+  <% end %>
+</ul></div>
