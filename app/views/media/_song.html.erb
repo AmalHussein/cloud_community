@@ -1,2 +1,2 @@
 
-<a href='#' class='song-link' id="song-<%=song.id%>" data-iframe-markup="<%=song.iframe_markup%>"><%= song.title %></a></br>
+<a href='#' class='song-link' id="song-<%=song.id%>" data-iframe-markup="<%=song.iframe_markup%>" data-path="<%=user_song_comments_path(song.user.id, song.id)%>">><%= song.title %></a></br>
