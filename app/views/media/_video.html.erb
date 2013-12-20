@@ -1,4 +1,4 @@
-<a href="#"class='video-link' id="video-<%=video.id%>" data-youtube-iframe="<%= video.youtube_iframe%>">
+<a href="#"class='video-link' id="video-<%=video.id%>" data-youtube-iframe="<%= video.youtube_iframe%>" data-video-id="<%=video.id%>" data-video-user-id="<%= video.user.id%>" data-path="<%=user_video_comments_path(video.user.id, video.id)%>">
 <%= image_tag video.thumbnail %> 
 </a></br> 
 

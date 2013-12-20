@@ -6,16 +6,33 @@ $(document).ready(function() {
 		event.preventDefault();
 		iframeMarkup = $('.song-link').data('iframe-markup');
 		$('#iframe-container').html(iframeMarkup);
-
-
-		
+	
 	});
 
 	$('.video-link').click(function(event){
-		var youtubeIframe;
+		var youtubeIframe, videoURL;
 		event.preventDefault();
-		youtubeIframe =$('.video-link').data('youtube-iframe')
+		youtubeIframe = $(this).data('youtube-iframe');
 		$('#iframe-container').html(youtubeIframe);
+
+		videoURL = $(this).data('path');
+
+			$.ajax({
+				url: videoURL, 
+				dataType: 'html', 
+				success: function(data){
+			$('#comments').html(data);
+
+				// ADDING IN ANOTHER HANDLER INSIDER AJAX CALL 
+				$('#new-link').click(function(event) {
+					event.preventDefault();
+					
+				});
+
+
+				}
+			});
+
 	});
 
 	$('.audio-links').hide();
@@ -31,5 +48,7 @@ $(document).ready(function() {
 		$('.audio-links').hide();
 		$('.video-links').show();	
 	});
+
+
 
 });

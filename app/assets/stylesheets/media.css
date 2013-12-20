@@ -6,6 +6,11 @@
 	margin-top: 175px;
 }
 
+#comments {
+	background-color: blue;
+	height: 200px;
+	width: 200px;
+}
 
 .full-top-bar {
 	width: 900px;

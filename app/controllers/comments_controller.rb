@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
 
   def index
   	@comments = @commentable.comments
+    render :index, layout: false 
   end
 
   def new
