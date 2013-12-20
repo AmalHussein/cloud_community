@@ -3,7 +3,7 @@
 $(document).ready(function() {
 
 	$('.song-link').click(function(event){
-		var iframeMarkup, songURL;
+		var iframeMarkup, songURL, newComments;
 		event.preventDefault();
 		iframeMarkup = $('.song-link').data('iframe-markup');
 		$('#iframe-container').html(iframeMarkup);
@@ -15,9 +15,29 @@ $(document).ready(function() {
 			dataType: 'html', 
 			success: function(data) {
 				$('#comments').html(data);
-			}
+			}	
+
 		});
+
+			$('#new-comment').click(function(event){
+			var commentBox; 
+			event.preventDefault();
+			commentBox = $(this).data('path');
+			$('#new-comment-box').html(commentBox)
+		});
+	
+		// $.ajax({
+		// 		url: newComments, 
+		// 		dataType: 'html', 
+		// 		success: function(data) {
+		// 			$('#new-comment').html(data);
+		// 		}
+		// 	});
+
 	});
+
+
+
 
 // Video Links Event Handler & Commments Ajax Call 
 $('.video-link').click(function(event){
@@ -53,7 +73,6 @@ $('#youtube').click(function(event){
 	$('.audio-links').hide();
 	$('.video-links').show();	
 });
-
 
 
 });

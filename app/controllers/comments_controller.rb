@@ -9,12 +9,16 @@ class CommentsController < ApplicationController
 
   def new
   	@comment = @commentable.comments.new 
+    render :new, layout: false
   end
 
   def create
     @comment = @commentable.comments.new(comment_params)
     if @comment.save
-      redirect_to [@commentable.user, @commentable], notice: "Comment created."
+      respond_to do |format|
+        format.html {redirect_to [@commentable.user, @commentable], notice: "Comment created."}
+        format.js 
+      end 
     else
       render :new
     end
