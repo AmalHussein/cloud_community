@@ -5,7 +5,7 @@ class CreateInstruments < ActiveRecord::Migration
     	t.text :image_icon
     	t.text :hover_icon 
     	t.text :description
-
+    
       t.timestamps
     end
   end
