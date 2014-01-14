@@ -7,7 +7,6 @@
 #  cc_email                   :text
 #  cc_first_name              :text
 #  cc_last_name               :text
-#  cc_birthday                :string(255)
 #  cc_zip_code                :string(255)
 #  cc_avatar                  :text
 #  provider                   :text
@@ -71,6 +70,8 @@
 #  avatar_content_type        :string(255)
 #  avatar_file_size           :integer
 #  avatar_updated_at          :datetime
+#  cc_birthday_day            :integer
+#  cc_birthday_month          :integer
 #
 
 class User < ActiveRecord::Base
@@ -86,7 +87,7 @@ class User < ActiveRecord::Base
   has_many :authentications
   has_many :videos
   has_many :songs
-  has_many :instruments
+  has_and_belongs_to_many :instruments
   has_many :comments, as: :commentable
   has_many :friendships
   has_many :friends, through: :friendships
