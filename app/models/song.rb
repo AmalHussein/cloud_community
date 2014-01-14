@@ -15,6 +15,8 @@
 #  description     :text
 #  uri             :text
 #  username        :text
+#  view_status     :text             default("private")
+#  icon            :text
 #  permalink       :text
 #  iframe_markup   :text
 #  created_at      :datetime

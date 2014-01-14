@@ -3,8 +3,14 @@
 <%= form_for(resource, :as => resource_name, :html => { :multipart => true }  , :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   
-  <div><%= f.label :cc_username %><br />
-  <%= f.text_field :cc_username, :autofocus => true %></div>	
+  <div><%= f.label :username %><br />
+  <%= f.text_field :cc_username, :autofocus => true %></div>
+
+  <div><%= f.label :first_name %><br />
+  <%= f.text_field :first_name, :autofocus => true %></div>  
+
+  <div><%= f.label :last_name %><br />
+  <%= f.text_field :last_name, :autofocus => true %></div> 
 
   <div><%= f.label :email %><br />
   <%= f.email_field :email, :autofocus => true %></div>
@@ -15,7 +21,15 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <%= f.file_field :avatar %>
+  <div>
+    <%= f.label :main_instrument %><br>
+    <%= collection_select(:user, :instrument_id, Instrument.all, :id, :name) %>
+  </div>
+
+  <div>
+    <%=f.label :upload_your_profile_photo%>
+    <%= f.file_field :avatar %>
+  </div>
   
   <div><%= f.submit "Sign up" %></div>
 <% end %>

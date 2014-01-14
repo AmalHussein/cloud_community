@@ -9,6 +9,7 @@
 #  cc_last_name               :text
 #  cc_birthday                :string(255)
 #  cc_zip_code                :string(255)
+#  cc_avatar                  :text
 #  provider                   :text
 #  sc_uid                     :text
 #  sc_id                      :text
@@ -66,6 +67,10 @@
 #  last_sign_in_at            :datetime
 #  current_sign_in_ip         :string(255)
 #  last_sign_in_ip            :string(255)
+#  avatar_file_name           :string(255)
+#  avatar_content_type        :string(255)
+#  avatar_file_size           :integer
+#  avatar_updated_at          :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
