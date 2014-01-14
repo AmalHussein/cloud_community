@@ -6,3 +6,24 @@
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+
+<h1>User Friends</h1>
+<div id="users">
+<% @user.friendships.each do |friendship|  %>
+  <div class="user">
+    <p>
+      <strong>My friend: <%= friendship.friend. cc_username %></strong>
+      <%= link_to " Remove Connection", friendship, method: :delete %>
+      <div class="clear"></div>
+    </p>
+  </div>
+<% end %>
+</div>
+
+<div>
+  <h2>Friended by Users</h2>
+<ul>
+  <% @user.inverse_friends.each do | user| %>
+    <li><%= user.cc_username %></li>
+  <% end %>
+</ul></div>
