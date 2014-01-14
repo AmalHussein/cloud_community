@@ -3,6 +3,7 @@
 $(document).ready(function() {
 
 	$('.song-link').click(function(event){
+		event.preventDefault();
 		var iframeMarkup, songURL, newComments;
 		event.preventDefault();
 		iframeMarkup = $('.song-link').data('iframe-markup');
@@ -35,8 +36,6 @@ $(document).ready(function() {
 		// 	});
 
 	});
-
-
 
 
 // Video Links Event Handler & Commments Ajax Call 
